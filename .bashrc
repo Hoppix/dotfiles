@@ -139,8 +139,8 @@ export PATH=$PATH:/sbin
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/hoppix
 
 #add rsa-keys and start the ssh-agent
-ssh-add ~/.ssh/github
 eval `ssh-agent -s`
+ssh-add ~/.ssh/github
 
 #more custom stuff
 clear
