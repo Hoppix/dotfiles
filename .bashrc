@@ -137,15 +137,13 @@ fi
 #custom
 export PATH=$PATH:/sbin
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/hoppix
-clear
-#screenfetch old now
 
-#aliases für Onedrive
-alias study='cd /media/hoppix/Yamato/Users/khopf/OneDrive/Dokumente/Studium" "Informatik/Module'
-#alias für git logging
-#alias gitlog= 'git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all'
+#add rsa-keys and start the ssh-agent
+eval `ssh-agent -s`
+ssh-add ~/.ssh/github
 
 #more custom stuff
 clear
-#neofetch
+neofetch
 printf "$FYEL welcome! \(^_^)/\n"
+
