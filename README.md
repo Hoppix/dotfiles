@@ -18,5 +18,7 @@ source ~/.config/hoppix/.hoppix_zshrc
 
 ## neovim
 
+* [harpoon](https://github.com/ThePrimeagen/harpoon)
+
 
 
