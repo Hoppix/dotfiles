@@ -1,0 +1,6 @@
+alias repos="cd /mnt/c/Users/khopf/Documents/repos"
+alias la="ls -a"
+alias sshyami="ssh -p 22 hoppix@192.168.178.36"
+alias python="python3"
+alias pip="pip3"
+alias vim="nvim"

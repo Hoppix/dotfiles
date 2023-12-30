@@ -1,0 +1,22 @@
+eval $(ssh-agent -s)
+ssh-add ~/.ssh/github
+
+# set poetry
+export PATH="$HOME/.local/bin:$PATH"
+
+# set config home
+export XDG_CONFIG_HOME="$HOME/.config"
+
+# source aliases
+source "$XDG_CONFIG_HOME/hoppix/.hoppix_aliases"
+
+# symlink for neovim
+# ln -s /usr/bin/nvim /usr/bin/vim
+
+# source brew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# source tmp
+tmux source ~/.config/tmux/tmux.conf
+
+clear
