@@ -2,7 +2,7 @@
 
 These are my own dotfiles for ease of convenience and setup.
 
-[preview](preview.png)
+![preview](preview.png)
 
 ## own rc files
 
