@@ -2,6 +2,8 @@
 
 These are my own dotfiles for ease of convenience and setup.
 
+[preview](preview.png)
+
 ## own rc files
 
 own rc files just source custom rc in default rc file and everything is set up.
