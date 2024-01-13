@@ -19,4 +19,8 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # source tmp
 tmux source ~/.config/tmux/tmux.conf
 
+# set default editor
+export EDITOR="nvim"
+export VISUAL="$EDITOR"
+
 clear
