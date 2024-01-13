@@ -24,11 +24,26 @@ source ~/.config/hoppix/.hoppix_zshrc
 
 ## neovim
 
+https://nvchad.com/
+
+### general
+I use nvchad for most of my configuration, this includes:
+
 * Navigation: [harpoon](https://github.com/ThePrimeagen/harpoon)
 * Navigation: [telescope](https://github.com/nvim-telescope/telescope.nvim)
 * Autocompletion and Language support: [lsp-zero](https://github.com/VonHeikemen/lsp-zero.nvim)
 * Debugging: [dap](https://github.com/mfussenegger/nvim-dap)
 * Syntax highliting: [treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+
+### Debugging
+
+Debugging is configured for:
+
+* python
+* java
+* javascript
+* go
+
 
 
 
