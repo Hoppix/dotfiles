@@ -23,4 +23,8 @@ tmux source ~/.config/tmux/tmux.conf
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 
+# set shell and terminal
+export SHELL="zsh"
+export TERMINAL="alacritty
+
 clear
