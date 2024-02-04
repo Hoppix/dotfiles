@@ -2,7 +2,8 @@
 
 These are my own dotfiles for ease of convenience and setup.
 
-![preview](preview.png)
+![alacritty](alacritty.png)
+![vscode](vscode.png)
 
 ## own rc files
 
