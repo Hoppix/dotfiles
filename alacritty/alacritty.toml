@@ -1,11 +1,10 @@
-#[shell]
-#program = "powershell"
+[env]
+# TERM = "xterm-256color"
 
-#[env]
-#TERM = "screen-256color"
+[cursor.style]
+shape = "Underline"
+blinking = "Always"
 
-[cursor]
-style = "Block"
 
 [font]
 size = 14.0
@@ -13,21 +12,34 @@ size = 14.0
 [font.normal]
 family = "Agave Nerd Font"
 
+[font.bold]
+family = "Agave Nerd Font"
+
+[font.italic]
+family = "Agave Nerd Font"
+
 [window]
 startup_mode = "Windowed"
 dynamic_padding = true
 opacity = 0.8
+blur = true
+title = "Hoppix"
+decorations_theme_variant = "Dark"
 
 [window.padding]
 x = 5
 y = 5
 
-#[window.dimensions]
-#columns = 90
-#lines = 25
+[window.dimensions]
+columns = 90
+lines = 25
+
+[scrolling]
+history = 50000
+multiplier = 4
 
 [colors.normal]
-black = "#1a1b2a"
+black = "#21222c"
 red = "#ff5555"
 green = "#50fa7b"
 yellow = "#f1fa8c"
@@ -35,7 +47,6 @@ blue = "#bd93f9"
 magenta = "#ff79c6"
 cyan = "#8be9fd"
 white = "#f8f8f2"
-
+ 
 [colors.primary]
 background = "#282a36"
-
