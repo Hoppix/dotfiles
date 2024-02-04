@@ -1,0 +1,41 @@
+#[shell]
+#program = "powershell"
+
+#[env]
+#TERM = "screen-256color"
+
+[cursor]
+style = "Beam"
+
+[font]
+size = 14.0
+
+[font.normal]
+family = "Agave Nerd Font"
+
+[window]
+startup_mode = "Windowed"
+dynamic_padding = true
+opacity = 0.8
+
+[window.padding]
+x = 5
+y = 5
+
+#[window.dimensions]
+#columns = 90
+#lines = 25
+
+[colors.normal]
+black = "#1a1b2a"
+red = "#ff5555"
+green = "#50fa7b"
+yellow = "#f1fa8c"
+blue = "#bd93f9"
+magenta = "#ff79c6"
+cyan = "#8be9fd"
+white = "#f8f8f2"
+
+[colors.primary]
+background = "#282a36"
+
