@@ -5,7 +5,7 @@
 #TERM = "screen-256color"
 
 [cursor]
-style = "Beam"
+style = "Block"
 
 [font]
 size = 14.0
