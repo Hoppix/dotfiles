@@ -3,6 +3,11 @@
 local plugins = {
 
   -- Override plugin definition options
+  {
+    "kyazdani42/nvim-tree.lua",
+    enabled = false,
+  },
+
 
   {
     "neovim/nvim-lspconfig",
@@ -28,6 +33,7 @@ local plugins = {
         "delve",
         "pyright",
         "debugpy",
+        "autopep8",
         "typescript-language-server",
         "js-debug-adapter",
         "java-language-server",
@@ -39,7 +45,7 @@ local plugins = {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-      ensure_installed = {"html", "css", "bash", "java", "javascript", "python", "go", "yaml", "json", "lua", "typescript"},
+      ensure_installed = {"html", "css", "bash", "java", "javascript", "python", "go", "yaml", "json", "lua", "typescript", "terraform"},
   },
 
   },

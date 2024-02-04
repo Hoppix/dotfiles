@@ -108,7 +108,7 @@ M.comment = {
 
   -- toggle comment in both modes
   n = {
-    ["<leader>/"] = {
+    ["<leader>ü"] = {
       function()
         require("Comment.api").toggle.linewise.current()
       end,

@@ -4,8 +4,8 @@ local M = {}
 M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
-    ["<leader>n"] = { "<cmd> NvimTreeToggle <CR>", "Toggle  super awesome NvimTree", opts = {} },
-    ["<leader>pv"] = { "<cmd> NvimTreeFocus <CR>", "Focus NvimTree like oldschool", opts = {} },
+    ["<leader>pv"] = {"<cmd> Ex <CR>", "toggle explore", opts = {}},
+
 
     --  format with conform
     ["<leader>fm"] = {
@@ -57,5 +57,28 @@ M.dap = {
     }
   },
 }
+
+M.comment = {
+  plugin = true,
+
+  -- toggle comment in both modes
+  n = {
+    ["<leader>ü"] = {
+      function()
+        require("Comment.api").toggle.linewise.current()
+      end,
+      "Toggle comment",
+    },
+  },
+
+  v = {
+    ["<leader>/"] = {
+      "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+      "Toggle comment",
+    },
+  },
+}
+
+
 
 return M
