@@ -1,60 +1,50 @@
-
 ---@type NvPluginSpec[]
+
 local plugins = {
 
   -- Override plugin definition options
   {
     "kyazdani42/nvim-tree.lua",
-    enabled = false,
+    enabled = true,
+  },
+
+  {
+    "nvim-tree/nvim-tree.lua",
+    enabled = true,
   },
 
 
   {
     "neovim/nvim-lspconfig",
     config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
+      local on_attach = require("plugins.configs.lspconfig").on_attach
+      local capabilities = require("plugins.configs.lspconfig").capabilities
+      local lsp_definitions = require("custom.lsp").lsp_definitions
+      for _, lsp in ipairs(lsp_definitions) do
+        require("lspconfig")[lsp].setup {
+          on_attach = on_attach,
+          capabilities = capabilities,
+        }
+      end
     end, -- Override to setup mason-lspconfig
   },
 
   -- override plugin configs
   {
     "williamboman/mason.nvim",
-      opts = {
-      ensure_installed = {
-        "lua-language-server",
-        "html-lsp",
-        "prettier",
-        "stylua",
-        "gopls",
-        "gofumpt",
-        "golines",
-        "goimports",
-        "delve",
-        "pyright",
-        "debugpy",
-        "autopep8",
-        "typescript-language-server",
-        "js-debug-adapter",
-        "java-language-server",
-        "java-debug-adapter",
-      },
+    opts = {
+      ensure_installed = require("custom.lsp").mason_definitions,
     },
   },
 
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-      ensure_installed = {"html", "css", "bash", "java", "javascript", "python", "go", "yaml", "json", "lua", "typescript", "terraform"},
-  },
+      ensure_installed = require("custom.lsp").treesitter_definitions,
+    },
 
   },
 
-  {
-    "nvim-tree/nvim-tree.lua",
-  },
-
-  -- Install a plugin
   {
     "max397574/better-escape.nvim",
     event = "InsertEnter",
@@ -65,10 +55,8 @@ local plugins = {
 
   {
     "stevearc/conform.nvim",
-    --  for users those who want auto-save conform + lazyloading
-    -- event = "BufWritePre"
     config = function()
-      require "custom.configs.conform"
+      require "custom.conform"
     end,
   },
 
@@ -92,12 +80,10 @@ local plugins = {
   },
 
 
-  -- debugging
-
   {
     "mfussenegger/nvim-dap",
     config = function(_, opts)
-      require("custom.configs.dap")
+      require("custom.dap")
       require("core.utils").load_mappings("dap")
     end
   },
