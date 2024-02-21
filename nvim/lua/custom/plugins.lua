@@ -13,7 +13,6 @@ local plugins = {
     enabled = true,
   },
 
-
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -42,7 +41,6 @@ local plugins = {
     opts = {
       ensure_installed = require("custom.lsp").treesitter_definitions,
     },
-
   },
 
   {
@@ -70,7 +68,6 @@ local plugins = {
     lazy = false,
   },
 
-
   {
     "stevearc/overseer.nvim",
     config = function()
@@ -79,13 +76,12 @@ local plugins = {
     lazy = false,
   },
 
-
   {
     "mfussenegger/nvim-dap",
     config = function(_, opts)
-      require("custom.dap")
-      require("core.utils").load_mappings("dap")
-    end
+      require "custom.dap"
+      require("core.utils").load_mappings "dap"
+    end,
   },
 
   {
@@ -98,7 +94,7 @@ local plugins = {
     config = function(_, opts)
       local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
       require("dap-python").setup(path)
-    end
+    end,
   },
 
   {
@@ -107,18 +103,18 @@ local plugins = {
     dependencies = "mfussenegger/nvim-dap",
     config = function(_, opts)
       require("dap-go").setup(opts)
-    end
+    end,
   },
 
   {
     "rcarriga/nvim-dap-ui",
     event = "VeryLazy",
     dependencies = {
-      "mfussenegger/nvim-dap"
+      "mfussenegger/nvim-dap",
     },
     config = function()
-      local dap = require("dap")
-      local dapui = require("dapui")
+      local dap = require "dap"
+      local dapui = require "dapui"
       dapui.setup()
       dap.listeners.after.event_initialized["dapui_config"] = function()
         dapui.open()
@@ -129,8 +125,19 @@ local plugins = {
       dap.listeners.before.event_exited["dapui_config"] = function()
         dapui.close()
       end
-    end
+    end,
   },
+
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      local copilot_config = require("copilot").copilot_config
+      require("copilot").setup(copilot_config)
+    end,
+  },
+
 }
 
 return plugins

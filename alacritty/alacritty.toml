@@ -1,5 +1,4 @@
 [env]
-# TERM = "xterm-256color"
 
 [cursor.style]
 shape = "Underline"
@@ -21,7 +20,7 @@ family = "Agave Nerd Font"
 [window]
 startup_mode = "Windowed"
 dynamic_padding = true
-opacity = 0.8
+opacity = 1.0
 blur = true
 title = "Hoppix"
 decorations_theme_variant = "Dark"
@@ -39,7 +38,7 @@ history = 50000
 multiplier = 4
 
 [colors.normal]
-black = "#21222c"
+black = "#121319"
 red = "#ff5555"
 green = "#50fa7b"
 yellow = "#f1fa8c"
@@ -49,4 +48,5 @@ cyan = "#8be9fd"
 white = "#f8f8f2"
  
 [colors.primary]
-background = "#282a36"
+background = "#1f2335"
+

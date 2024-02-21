@@ -11,7 +11,7 @@ M.plugins = "custom.plugins"
 M.mappings = require("custom.mappings")
 
 
-M.ui.transparency = true
+M.ui.transparency = false
 
 M.ui.nvdash = {
     load_on_startup = true,
