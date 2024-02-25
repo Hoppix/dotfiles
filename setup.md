@@ -70,10 +70,21 @@
 * install I3WM: <https://i3wm.org/downloads/>
 * ``cp -r i3 ~/.config``
 
-#### polybar
-
 #### GTK theme
+
+* download the tokyo night gtk theme: <https://www.gnome-look.org/p/1681315>
+* download the cursor: <https://www.gnome-look.org/p/1681315>
+* download the icon theme: <https://www.gnome-look.org/p/1651517>
+* and put it into ``~/.themes``
+* copy the config file into ``.config``
+* ``cp -r gtk-3.0 ~/.config``
 
 #### setup wallpaper
 
+* copy the wallpapers into the config dir
+* ``cp -r wallpaper ~/.config``
+* i3 should pick it up and set the bg from the config
+
 #### setup multiple screens
+
+* <https://wiki.ubuntuusers.de/RandR/>

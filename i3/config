@@ -26,38 +26,16 @@
         # Hide borders at the edge of the screen
         hide_edge_borders smart
 
-        # Set colours various window states
-        # Syntax: client.<class> <border> <background> <text> [<indicator> [<child_border>]]
-        # The available classes are:
-            # client.focused: The window that has focus.
-            # client.focused_inactive: The most recently focused view within a container which is not focused.
-            # client.placeholder: Ignored (present for i3 compatibility).
-            # client.unfocused: A view that does not have focus.
-            # client.urgent: A view with an urgency hint. Note: Native Wayland windows do not support urgency. Urgency only works for Xwayland windows.
-        #The meaning of each color is:
-            # border: The border around the title bar.
-            # background: The background of the title bar.
-            # text: The text color of the title bar.
-            # indicator: The color used to indicate where a new view will open. In a tiled container, this would paint the right border of the current view if a new view would be opened to the right.
-            # child_border: The border around the view itself.
-        # The default colors are:
-            # class	        border	background	text    indicator	child_border			
-            # background	n/a	    #ffffff     n/a	    n/a	        n/a
-            # focused	    #4c7899	#285577	    #ffffff	#2e9ef4	    #285577
-            # focused_inactive	#333333	#5f676a	#ffffff	#484e50	    #5f676a
-            # unfocused	    #333333	#222222	    #888888	#292d2e	    #222222
-            # urgent	    #2f343a	#900000	    #ffffff	#900000	    #900000
-            # placeholder	#000000	#0c0c0c	    #ffffff	#000000 	#0c0c0c
+        set $bg-color #364A82
+        set $inactive-bg-color #16161d
+        set $text-color #c0caf5
+        set $inactive-text-color #c0caf5
+        set $urgent-bg-color #900000
+
         client.focused           #9aa5ce #364A82 #c0caf5 #9aa5ce   #9aa5ce
         client.focused_inactive  #16161d #16161d #c0caf5 #16161d   #16161d
         client.unfocused         #16161d #16161d #c0caf5 #16161d   #16161d
 
-    # Gaps
-        # gaps inner|outer|horizontal|vertical|top|right|bottom|left <amount>
-        # Sets default amount pixels of inner or outer gap
-        # the inner affects spacing around each view
-        # the outer affects the spacing around each workspace
-        # To reduce or remove outer gaps, outer gaps can be set to a negative value.
         gaps inner 5
         gaps outer 2
         gaps top 2
@@ -74,19 +52,18 @@
         bindsym $mod+d exec rofi -no-lazy-grab -show drun -modi drun
 
     # Power menu
-        bindsym $mod+P exec /home/marco/.config/wofi/wofi-power.sh
+        bindsym $mod+P exec /home/hoppix/.config/wofi/wofi-power.sh
 
 
 ######### Output Configuration #########
 ###          Monitors n shit         ###
 
     # Wallpaper
+    exec --no-startup-id feh --bg-fill /home/hoppix/.config/wallpaper/cyberpunk.jpeg
 
 
 
 #########    Key Bindindings   #########
-###          (I use Arch BTW)        ###
-
     # Start a terminal
         bindsym $mod+Return exec $term
 
@@ -165,12 +142,8 @@
     # Screenshot / share shortcuts
         bindsym Print exec "maim -u -s -n -l -c 0.157,0.333,0.466,0.4 ~/Pictures/Screenshot-$(date -Iseconds | cut -d'+' -f1).png"
         bindsym $mod+Print exec "maim -u -s -n -l -c 0.157,0.333,0.466,0.4 | xclip -selection clipboard -t image/png"
-        #bindsym Shift+Print exec ~/.files/i3/record-screen.sh byzanz
-        #bindsym Shift+Ctrl+Print exec ~/.files/i3/record-screen.sh gif
-        #bindsym Shift+$mod+Print exec ~/.files/i3/record-screen.sh ogv
 
 #########  Resizing Containers #########
-### $mod+mouseClick works better tho ###
 
     mode "resize" {
             bindsym h resize shrink width 10 px or 10 ppt
@@ -198,5 +171,16 @@
 # network manager
     exec --no-startup-id nm-applet &
 
-# polybar
-    exec_always /home/marco/.config/polybar/launch.sh --grayblocks &
+# polybar is bloat
+bar {
+        position top
+        status_command SCRIPT_DIR=~/.config/i3/scripts i3blocks -c ~/.config/i3/i3blocks.conf
+        colors {
+		            background $inactive-bg-color
+	    	        separator $bg-color
+		            #                  border             background         text
+		            focused_workspace  $bg-color          $bg-color          $text-color
+		            inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+		            urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+	      }
+}
