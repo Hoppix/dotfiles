@@ -1,5 +1,6 @@
 eval $(ssh-agent -s)
-ssh-add ~/.ssh/github
+# your ssh key here
+# ssh-add ~/.ssh/github
 
 # ls colors
 # one dark atm

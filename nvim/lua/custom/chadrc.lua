@@ -17,7 +17,7 @@ M.ui.nvdash = {
     load_on_startup = true,
 
     header = {
-        "   H O P P I X",
+        "        H O P P I X     ",
     },
 
     buttons = {
