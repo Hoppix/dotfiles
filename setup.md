@@ -78,7 +78,10 @@
 * and put it into ``~/.themes``
 * copy the config file into ``.config``
 * ``cp -r gtk-3.0 ~/.config``
-
+* others:
+  * oreo_grey_cursors
+  * Tokyonight-Storm-B
+  * Graphite-tel-dark-nord-rimless (shell)
 #### setup wallpaper
 
 * copy the wallpapers into the config dir
