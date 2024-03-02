@@ -114,7 +114,7 @@
     "editor.hover.hidingDelay": 280,
     "editor.hover.sticky": false,
     "editor.insertSpaces": true,
-    "editor.letterSpacing": 0.5,
+    "editor.letterSpacing": 0.0,
     "editor.lightbulb.enabled": "off",
     "editor.lineNumbers": "relative",
     "editor.linkedEditing": true,
@@ -160,7 +160,8 @@
         "markdown": true,
         "plaintext": false,
         "scminput": false,
-        "typescript": true
+        "typescript": true,
+        "java": false,
     },
     "inlineChat.showDiff": false,
     "notebook.lineNumbers": "on",
@@ -309,4 +310,143 @@
     "terminal.integrated.cursorBlinking": true,
     "editor.multiCursorModifier": "alt",
     "editor.suggest.showSnippets": true,
+    "vim.leader": "<Space>",
+    "vim.autoindent": true,
+    "vim.visualModeKeyBindings": [
+        {
+            "before": [
+                "leader",
+                "c"
+            ],
+            "commands": [
+                "editor.action.commentLine"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "w"
+            ],
+            "commands": [
+                "workbench.action.files.saveAll"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "p",
+                "v"
+            ],
+            "commands": [
+                "workbench.explorer.fileView.focus"
+            ]
+        },
+        {
+            "before": [
+                "<S-h>"
+            ],
+            "commands": [
+                ":bprevious"
+            ]
+        },
+        {
+            "before": [
+                "<S-l>"
+            ],
+            "commands": [
+                ":bnext"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "f",
+                "f"
+            ],
+            "commands": [
+                "workbench.action.quickOpen"
+            ]
+        },
+        {
+            "before": [
+                "leader",
+                "c"
+            ],
+            "commands": [
+                "editor.action.commentLine"
+            ]
+        },
+        {
+            "before": [
+                "leader",
+                "f",
+                "m"
+            ],
+            "commands": [
+                "editor.action.formatDocument"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "c",
+                "a"
+            ],
+            "commands": [
+                "editor.action.quickFix"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "a",
+                "a"
+            ],
+            "commands": [
+                "workbench.action.quickOpen"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "d"
+            ],
+            "commands": [
+                "editor.action.goToDeclaration"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "r"
+            ],
+            "commands": [
+                "editor.action.goToReferences"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "i"
+            ],
+            "commands": [
+                "editor.action.goToImplementation"
+            ]
+        },
+        {
+           "before": [
+            "<leader>",
+            "t",
+            "t"
+           ],
+              "commands": [
+                "editor.action.rename"
+              ]
+        }
+    ]
 }
