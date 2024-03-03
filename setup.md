@@ -94,3 +94,5 @@
 
 ## troubleshooting arch
 * for displaying japanese fonts: <https://unix.stackexchange.com/questions/356084/how-can-i-get-japanese-characters-to-show-properly-in-firefox-on-arch>
+*  iwctl: <https://www.youtube.com/watch?v=JXp4xJb-AHI>
+* pipewireaudio: <https://www.youtube.com/watch?v=zmNCi9wqiuU&t=113s>
