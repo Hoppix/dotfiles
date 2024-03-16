@@ -5,7 +5,10 @@ M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
     ["<leader>pv"] = {"<cmd> NvimTreeToggle <CR>", "toggle explore", opts = {}},
-    ["<leader>bd"] = {"<cmd> %bd|e# <CR>", "toggle explore", opts = {}},
+    ["<leader>bd"] = {"<cmd> %bd|e# <CR>", "close all other buffers", opts = {}},
+    ["<leader>ww"] = {"<cmd> :wa <CR>", "write all buffers", opts = {}},
+    ["<leader>qa"] = {"<cmd> :qa! <CR>", "close everything", opts = {}},
+    ["<leader>xa"] = {"<cmd> :xa <CR>", "close everything and save", opts = {}},
 
 
 

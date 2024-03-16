@@ -128,16 +128,6 @@ local plugins = {
     end,
   },
 
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      local copilot_config = require("copilot").copilot_config
-      require("copilot").setup(copilot_config)
-    end,
-  },
-
 }
 
 return plugins
