@@ -1,4 +1,4 @@
-local dap = require("dap")
+local dap = require "dap"
 
 dap.adapters["pwa-node"] = {
   type = "server",
@@ -6,10 +6,10 @@ dap.adapters["pwa-node"] = {
   port = 8123,
   executable = {
     command = "js-debug-adapter",
-  }
+  },
 }
 
-for _, language in ipairs { "typescript", "javascript"} do
+for _, language in ipairs { "typescript", "javascript" } do
   dap.configurations[language] = {
     {
       type = "pwa-node",
@@ -21,3 +21,30 @@ for _, language in ipairs { "typescript", "javascript"} do
     },
   }
 end
+
+dap.configurations.python = {
+  type = "python",
+  request = "launch",
+  name = "Launch current file",
+  program = "${file}",
+  cwd = "${workspaceFolder}",
+}
+
+dap.configurations.go = {
+  type = "go",
+  request = "launch",
+  name = "Launch current file",
+  program = "${file}",
+  cwd = "${workspaceFolder}",
+}
+
+-- Function to load the local DAP configuration
+local function load_dap_config()
+  local project_dap_config = vim.fn.getcwd() .. "/.vscode/dap_config.lua"
+  if vim.fn.filereadable(project_dap_config) == 1 then
+    dofile(project_dap_config)
+  end
+end
+
+-- Call the function to load the local config
+load_dap_config()
