@@ -41,9 +41,64 @@ I use nvchad for most of my configuration, this includes:
 Debugging is configured for:
 
 * python
-* java
-* javascript
 * go
+
+#### Custom debug config
+
+Similar to a `.vscode/launch.json` you can configure your debugger with args
+and environment variables. Just create `.vscode/dap_config.lua` in your project workspace
+* python
+```lua
+local dap = require('dap')
+
+dap.adapters.python = {
+    type = 'executable',
+    command = os.getenv('HOME') .. '/.virtualenvs/debugpy/bin/python',
+    args = { '-m', 'debugpy.adapter' },
+}
+
+dap.configurations.python = {
+    {
+        type = 'python',
+        request = 'launch',
+        name = 'Launch file',
+        program = '${file}',
+        pythonPath = function()
+            return '/usr/bin/python' -- Or your custom python path
+        end,
+        env = {
+            FOO = 'project_specific_value',
+            BAR = 'another_project_value',
+        },
+    },
+}
+```
+
+* golang
+```lua
+-- dap_config.lua
+local dap = require('dap')
+
+
+local dapgo = require('dap-go')
+
+dapgo.setup()
+
+dap.configurations.go = {
+    {
+        type = 'go',
+        request = 'launch',
+        name = 'launch custom',
+        program = '${file}',
+        cwd = '${workspaceFolder}',
+        env = {
+            FOO = 'project_specific_value',
+            BAR = 'another_project_value',
+        },
+    },
+}
+
+```
 
 
 

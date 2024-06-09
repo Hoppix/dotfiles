@@ -1,4 +1,5 @@
 local dap = require "dap"
+local dapgo = require "dap-go"
 
 dap.adapters["pwa-node"] = {
   type = "server",
@@ -37,6 +38,7 @@ dap.configurations.go = {
   program = "${file}",
   cwd = "${workspaceFolder}",
 }
+
 
 -- Function to load the local DAP configuration
 local function load_dap_config()
