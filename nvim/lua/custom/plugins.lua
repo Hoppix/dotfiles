@@ -2,7 +2,6 @@
 
 local plugins = {
 
-  -- Override plugin definition options
   {
     "kyazdani42/nvim-tree.lua",
     enabled = true,
@@ -25,10 +24,9 @@ local plugins = {
           capabilities = capabilities,
         }
       end
-    end, -- Override to setup mason-lspconfig
+    end,
   },
 
-  -- override plugin configs
   {
     "williamboman/mason.nvim",
     opts = {

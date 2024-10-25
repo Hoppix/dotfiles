@@ -40,7 +40,6 @@ dap.configurations.go = {
 }
 
 
--- Function to load the local DAP configuration
 local function load_dap_config()
   local project_dap_config = vim.fn.getcwd() .. "/.vscode/dap_config.lua"
   if vim.fn.filereadable(project_dap_config) == 1 then
@@ -48,5 +47,4 @@ local function load_dap_config()
   end
 end
 
--- Call the function to load the local config
 load_dap_config()

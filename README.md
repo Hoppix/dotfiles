@@ -2,8 +2,8 @@
 
 These are my own dotfiles for ease of convenience and setup.
 
-![alacritty](alacritty.png)
-![vscode](vscode.png)
+![clean](rice_2.png)
+![productive](rice_productive_2.png)
 
 ## own rc files
 
