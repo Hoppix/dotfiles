@@ -2,6 +2,7 @@
 
 local plugins = {
 
+  -- Override plugin definition options
   {
     "kyazdani42/nvim-tree.lua",
     enabled = true,
@@ -24,9 +25,10 @@ local plugins = {
           capabilities = capabilities,
         }
       end
-    end,
+    end, -- Override to setup mason-lspconfig
   },
 
+  -- override plugin configs
   {
     "williamboman/mason.nvim",
     opts = {
@@ -92,6 +94,7 @@ local plugins = {
     config = function(_, opts)
       local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
       require("dap-python").setup(path)
+      require("dap-python").test_runner = "pytest"
     end,
   },
 
@@ -127,6 +130,20 @@ local plugins = {
     end,
   },
 
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    lazy = true,
+    cmd = "CopilotChatOpen",
+    branch = "canary",
+    dependencies = {
+      { "zbirenbaum/copilot.lua" },
+      { "nvim-lua/plenary.nvim" },
+    },
+    build = "make tiktoken",
+    opts = {
+      debug = true,
+    },
+  },
 }
 
 return plugins

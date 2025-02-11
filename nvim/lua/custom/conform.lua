@@ -1,3 +1,5 @@
+local conform = require("conform")
+
 local options = {
 	lsp_fallback = true,
 
@@ -11,9 +13,10 @@ local options = {
 		sh = { "shfmt" },
 		java = { "google-java-format" },
 
-    	python = { "autopep8"},
+    	python = { "ruff"},
     	go = {"gofumpt"}
 	},
 }
 
-require("conform").setup(options)
+
+conform.setup(options)

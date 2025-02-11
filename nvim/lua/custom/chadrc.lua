@@ -1,7 +1,7 @@
 ---@type ChadrcConfig
 local M = {}
 
-M.ui = { 
+M.ui = {
     theme = 'tokyonight',
     theme_toggle = { "tokyonight", "one_light" },
 }
@@ -11,7 +11,7 @@ M.plugins = "custom.plugins"
 M.mappings = require("custom.mappings")
 
 
-M.ui.transparency = true
+M.ui.transparency = false
 
 M.ui.nvdash = {
     load_on_startup = true,
