@@ -1,0 +1,6 @@
+
+background = "#1f2335"
+font-family = "Agave Nerd Font"
+theme = "tokyonight_moon"
+cursor-style = "underline"
+cursor-style-blink = "true"
