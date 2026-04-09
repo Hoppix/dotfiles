@@ -1,252 +1,132 @@
--- All plugins have lazy=true by default,to load a plugin on startup just lazy=false
--- List of all default plugins & their definitions
-local default_plugins = {
-
-  "nvim-lua/plenary.nvim",
+return {
+  -- Comment toggling
+  { "numToStr/Comment.nvim", lazy = false, opts = {} },
 
   {
-    "NvChad/base46",
-    branch = "v2.0",
-    build = function()
-      require("base46").load_all_highlights()
-    end,
+    "stevearc/conform.nvim",
+    -- event = 'BufWritePre', -- uncomment for format on save
+    opts = require "configs.conform",
   },
 
-  {
-    "NvChad/ui",
-    branch = "v2.0",
-    lazy = false,
-  },
-
-  {
-    "zbirenbaum/nvterm",
-    init = function()
-      require("core.utils").load_mappings "nvterm"
-    end,
-    config = function(_, opts)
-      require "base46.term"
-      require("nvterm").setup(opts)
-    end,
-  },
-
-  {
-    "NvChad/nvim-colorizer.lua",
-    event = "User FilePost",
-    config = function(_, opts)
-      require("colorizer").setup(opts)
-
-      -- execute colorizer as soon as possible
-      vim.defer_fn(function()
-        require("colorizer").attach_to_buffer(0)
-      end, 0)
-    end,
-  },
-
-  {
-    "nvim-tree/nvim-web-devicons",
-    opts = function()
-      return { override = require "nvchad.icons.devicons" }
-    end,
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "devicons")
-      require("nvim-web-devicons").setup(opts)
-    end,
-  },
-
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    version = "2.20.7",
-    event = "User FilePost",
-    opts = function()
-      return require("plugins.configs.others").blankline
-    end,
-    config = function(_, opts)
-      require("core.utils").load_mappings "blankline"
-      dofile(vim.g.base46_cache .. "blankline")
-      require("indent_blankline").setup(opts)
-    end,
-  },
-
-  {
-    "nvim-treesitter/nvim-treesitter",
-    event = { "BufReadPost", "BufNewFile" },
-    cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
-    build = ":TSUpdate",
-    opts = function()
-      return require "plugins.configs.treesitter"
-    end,
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "syntax")
-      require("nvim-treesitter.configs").setup(opts)
-    end,
-  },
-
-  -- git stuff
-  {
-    "lewis6991/gitsigns.nvim",
-    event = "User FilePost",
-    opts = function()
-      return require("plugins.configs.others").gitsigns
-    end,
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "git")
-      require("gitsigns").setup(opts)
-    end,
-  },
-
-  -- lsp stuff
-  {
-    "williamboman/mason.nvim",
-    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
-    opts = function()
-      return require "plugins.configs.mason"
-    end,
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "mason")
-      require("mason").setup(opts)
-
-      -- custom nvchad cmd to install all mason binaries listed
-      vim.api.nvim_create_user_command("MasonInstallAll", function()
-        if opts.ensure_installed and #opts.ensure_installed > 0 then
-          vim.cmd("MasonInstall " .. table.concat(opts.ensure_installed, " "))
-        end
-      end, {})
-
-      vim.g.mason_binaries_list = opts.ensure_installed
-    end,
-  },
-
+  -- These are some examples, uncomment them if you want to see them work!
   {
     "neovim/nvim-lspconfig",
-    event = "User FilePost",
     config = function()
-      require "plugins.configs.lspconfig"
+      require "configs.lspconfig"
     end,
   },
 
-  -- load luasnips + cmp related in insert mode only
+  -- Mason core setup + manual ensure install via registry (stable and simple)
   {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = {
-      {
-        -- snippet plugin
-        "L3MON4D3/LuaSnip",
-        dependencies = "rafamadriz/friendly-snippets",
-        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-        config = function(_, opts)
-          require("plugins.configs.others").luasnip(opts)
-        end,
-      },
+    "williamboman/mason.nvim",
+    lazy = false,
+    config = function()
+      require("mason").setup()
+      local mr = require "mason-registry"
+      local ensure = {
+        -- LSP servers & tools (Mason package names)
+        "lua-language-server",
+        "pyright",
+        "gopls",
+        "terraform-ls",
+        "bash-language-server",
+        "json-lsp",
+        "yaml-language-server",
+        "html-lsp",
+        "css-lsp",
+        "jdtls",
+        -- Formatters/linters
+        "stylua",
+        "prettier",
+        "shfmt",
+        "google-java-format",
+        "ruff",
+        "gofumpt",
+        "golines",
+        "goimports",
+        -- Debuggers for current stack
+        "delve",
+        "debugpy",
+        "kotlin-debug-adapter",
+      }
 
-      -- autopairing of (){}[] etc
-      {
-        "windwp/nvim-autopairs",
-        opts = {
-          fast_wrap = {},
-          disable_filetype = { "TelescopePrompt", "vim" },
-        },
-        config = function(_, opts)
-          require("nvim-autopairs").setup(opts)
+      local function install_all()
+        for _, name in ipairs(ensure) do
+          local ok, pkg = pcall(mr.get_package, name)
+          if ok and not pkg:is_installed() then
+            pkg:install()
+          end
+        end
+      end
 
-          -- setup cmp for autopairs
-          local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-          require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
-        end,
-      },
-
-      -- cmp sources plugins
-      {
-        "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-nvim-lua",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-      },
-    },
-    opts = function()
-      return require "plugins.configs.cmp"
-    end,
-    config = function(_, opts)
-      require("cmp").setup(opts)
-    end,
-  },
-
-  {
-    "numToStr/Comment.nvim",
-    keys = {
-      { "gcc", mode = "n", desc = "Comment toggle current line" },
-      { "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
-      { "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
-      { "gbc", mode = "n", desc = "Comment toggle current block" },
-      { "gb", mode = { "n", "o" }, desc = "Comment toggle blockwise" },
-      { "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
-    },
-    init = function()
-      require("core.utils").load_mappings "comment"
-    end,
-    config = function(_, opts)
-      require("Comment").setup(opts)
-    end,
-  },
-
-  -- file managing , picker etc
-  {
-    "nvim-tree/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-    init = function()
-      require("core.utils").load_mappings "nvimtree"
-    end,
-    opts = function()
-      return require "plugins.configs.nvimtree"
-    end,
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "nvimtree")
-      require("nvim-tree").setup(opts)
-    end,
-  },
-
-  {
-    "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    cmd = "Telescope",
-    init = function()
-      require("core.utils").load_mappings "telescope"
-    end,
-    opts = function()
-      return require "plugins.configs.telescope"
-    end,
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "telescope")
-      local telescope = require "telescope"
-      telescope.setup(opts)
-
-      -- load extensions
-      for _, ext in ipairs(opts.extensions_list) do
-        telescope.load_extension(ext)
+      if mr.refresh then
+        mr.refresh(install_all)
+      else
+        install_all()
       end
     end,
   },
 
-  -- Only load whichkey after all the gui
+  -- File explorer
+  { "nvim-tree/nvim-tree.lua", opts = {} },
+
+  -- Tmux navigation
+  { "christoomey/vim-tmux-navigator", lazy = false },
+
+  -- Overseer task runner
+  { "stevearc/overseer.nvim", config = function() require("overseer").setup() end },
+
+  -- Treesitter languages
   {
-    "folke/which-key.nvim",
-    keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
-    init = function()
-      require("core.utils").load_mappings "whichkey"
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim",
+        "vimdoc",
+        "lua",
+        "html",
+        "css",
+        "javascript",
+        "typescript",
+        "json",
+        "yaml",
+        "bash",
+        "python",
+        "go",
+        "terraform",
+        "java",
+        "kotlin",
+        "rust",
+      },
+    },
+  },
+
+  -- DAP core and UI
+  { "mfussenegger/nvim-dap", config = function() require "configs.dap" end },
+  {
+    "rcarriga/nvim-dap-ui",
+    event = "VeryLazy",
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+    config = function()
+      local dap = require "dap"
+      local dapui = require "dapui"
+      dapui.setup()
+      dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
+      dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
+      dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
     end,
-    cmd = "WhichKey",
+  },
+
+  -- DAP language helpers
+  { "leoluz/nvim-dap-go", ft = "go", dependencies = "mfussenegger/nvim-dap", config = function(_, opts) require("dap-go").setup(opts) end },
+  {
+    "mfussenegger/nvim-dap-python",
+    ft = "python",
+    dependencies = { "mfussenegger/nvim-dap", "rcarriga/nvim-dap-ui" },
     config = function(_, opts)
-      dofile(vim.g.base46_cache .. "whichkey")
-      require("which-key").setup(opts)
+      local path = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python"
+      require("dap-python").setup(path)
+      require("dap-python").test_runner = "pytest"
     end,
   },
 }
-
-local config = require("core.utils").load_config()
-
-if #config.plugins > 0 then
-  table.insert(default_plugins, { import = config.plugins })
-end
-
-require("lazy").setup(default_plugins, config.lazy_nvim)
