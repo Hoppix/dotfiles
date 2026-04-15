@@ -48,6 +48,8 @@ return {
         "delve",
         "debugpy",
         "kotlin-debug-adapter",
+        -- Typst
+        "tinymist",
       }
 
       local function install_all()
@@ -97,6 +99,7 @@ return {
         "java",
         "kotlin",
         "rust",
+        "typst",
       },
     },
   },

@@ -16,6 +16,7 @@ local servers = {
 	"jsonls",
 	"yamlls",
 	"jdtls",
+	"tinymist",
 }
 
 local lspconfig = require "lspconfig"
