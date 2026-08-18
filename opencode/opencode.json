@@ -1,0 +1,23 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "sentrux": {
+      "type": "local",
+      "command": ["sentrux", "mcp"],
+      "enabled": true
+    },
+    "memory": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-memory"],
+      "enabled": true,
+      "environment": {
+        "MEMORY_FILE_PATH": "/Users/kolja.hopfmann/.local/share/opencode/memory.jsonl"
+      }
+    },
+    "sneak": {
+      "type": "remote",
+      "url": "https://sneak.live.search.cloud.otto.de/mcp",
+      "enabled": true
+    }
+  }
+}
